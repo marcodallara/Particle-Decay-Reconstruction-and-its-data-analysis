@@ -1,0 +1,55 @@
+#include "EventDump.h"
+#include "Event.h"
+#include <iostream>
+#include "AnalysisFactory.h"
+
+using namespace std;
+
+// concrete factory to create an EventDump analyzer
+class EventDumpFactory: public AnalysisFactory::AbsFactory {
+ public:
+  // assign "dump" as name for this analyzer and factory
+  EventDumpFactory(): AnalysisFactory::AbsFactory( "dump" ) {}
+  // create an EventDump when builder is run
+  AnalysisSteering* create( const AnalysisInfo* info ) override {
+    return new EventDump( info );
+  }
+};
+
+// create a global EventDumpFactory, so that it is created and registered 
+// before main execution start:
+// when the AnalysisFactory::create function is run,
+// an EventDumpFactory will be available with name "dump".
+static EventDumpFactory ed;
+
+EventDump::EventDump( const AnalysisInfo* info):
+  AnalysisSteering ( info) {
+}
+
+
+EventDump::~EventDump() {
+}
+
+
+// function to be called at execution start
+void EventDump::beginJob() {
+  return;
+}
+
+
+// function to be called at execution end
+void EventDump::endJob() {
+  return;
+}
+
+
+// function to be called for each event
+void EventDump::process( const Event& ev ) {
+  cout<< ev.get_ev_id() << ' ' << endl;
+  cout<< ev.get_x() << ' ' << ev.get_y() << ' ' << ev.get_z() << endl;
+  cout<< ev.get_n_particle() << endl;
+  for(int i=0;i<ev.get_n_particle();i++)
+    cout<<ev.get_particle(i)->charge << ' ' << ev.get_particle(i)->p_x << ' ' << ev.get_particle(i)->p_y << ' ' << ev.get_particle(i)->p_z << endl;
+
+}
+
