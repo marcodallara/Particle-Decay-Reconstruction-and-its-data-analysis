@@ -1,0 +1,13 @@
+#ifndef utilities_h
+#define utilities_h
+
+class utilities {
+
+  static double energy(double p_x, double p_y, double p_z, double inv_m );
+
+  static double inv_m(double p_x, double p_y, double p_z, double energy );
+
+  
+};
+
+#endif
