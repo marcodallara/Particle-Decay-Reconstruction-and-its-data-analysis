@@ -1,0 +1,14 @@
+./execName fileName
+
+read.cc reads events from files
+
+dump.cc dumps events data
+
+mass.cc compute invariant mass of an event
+
+add.cc if looped for each event contribute to compute statistic variables
+
+for more information check <foldername>.txt file in this folder.
+
+
+

@@ -1,0 +1,49 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+#include "Event.h"
+#include "MassMean.h"
+
+struct Particle;
+
+void dump(const Event& e);
+const Event* read(std:: ifstream& in );
+
+
+
+int main( int argc, char* argv[] ) {
+
+  std::string name = argv[1];
+  std::ifstream file( name ); //open input file
+
+  // create MassMean objects
+  MassMean K0(0.495, 0.500);
+  MassMean Lambda0(1.115, 1.116);
+
+  // loop over events
+  const Event* e;
+   while( ( e = read( file))  != nullptr ){ //looping file
+    dump( *e );
+    K0.add(*e);
+    Lambda0.add(*e);
+    delete e;
+    
+  }
+
+  // compute results
+   K0.compute();
+   Lambda0.compute();
+
+  // print number of selected events and results for both particles
+   std::cout<<"K0 selected events"<<K0.get_n_accev()<<std::endl;
+   std::cout<<"Lambda0 selected events"<<Lambda0.get_n_accev()<<std::endl;
+								std::cout<<"K0 mean and rms"<<K0.get_mean_im()<<"  "<<K0.get_rms_im()<<std::endl;
+																       std::cout<<"Lambda0 mean and rms"<<Lambda0.get_mean_im()<<"  "<<Lambda0.get_rms_im()<<std::endl;
+
+							       
+   
+  return 0;
+
+}
+

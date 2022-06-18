@@ -1,0 +1,20 @@
+#include <iostream>
+#include <math.h>
+
+#include "Particle.h"
+#include "Event.h"
+
+double mass(const Event& e);
+
+bool add(const Event& e, float min, float max, double& sum_im, double& sum_sqim ){
+  double im =mass(e);
+  if(im < max && im > min ){
+    im-=min;//to contrast limited precision;
+    sum_im += im;
+    sum_sqim += pow(im , 2);
+    return true;
+  }
+  else {return false;}
+  
+
+}

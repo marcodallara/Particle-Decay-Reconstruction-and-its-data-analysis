@@ -1,0 +1,18 @@
+./execName fileName
+
+read.cc reads events from files
+
+dump.cc dumps events data
+
+mass.cc compute invariant mass of an event
+
+MassMean makes the statistic analysis 
+
+Costants contains useful costants
+
+utilities contains useful function to compute energy, inv mas...
+
+for more information check <foldername>.txt file in this folder.
+
+
+
