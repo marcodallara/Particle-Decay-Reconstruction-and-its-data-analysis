@@ -1,0 +1,43 @@
+you can choose if take fie from input or make a simultaion
+./execName input fileName
+or 
+./execName sim numberOfEvents [seedNumber]
+ and next to that you can choose what "analyzator" use (particlemass dump or particlelifetime)
+to get ranges: 
+for ParticleMass : ParticleMassRanges fileName.
+for ParticleLifetime : ParticleLifetimeRanges fileName.
+otherwise is gonna take classic K0 and Lambda0
+
+for Example: ./main input particle_events.txt particlemass ParticleMassRanges massRanges particlelifetime ParticleLifetimeRanges particleFitters
+
+
+AnalysisInfo object that have and works on input words given by terminal.
+
+AnalysisSteering manage the analysis: Dump Events (EventDump), manage the MassMean object that find the mean im and its std and put them in a histogram for a type of particle (particleMass). ParticleMass e EventDump inherit from ActiveObserver<Event>.
+ParticleLifeTime is very similiar to ParticleMass but for the times.
+
+SourceFactory is a Factory of eventSource .Taking an analysisInfo object it creates the right EventSource derivated (EventSim or Eventreadfromfile) 
+
+AnalysisFactory is a Factory of AnalysisSteering. 
+There is an AbstractFactory of the AnlalysisSteering which make possibile create runtime AnalysisSteering object dependig on the command line.
+
+
+EventSource: specialize himself in EventReadFromFile(take the events from a file) and EventSim (silmulate the events)
+
+TFileProxy is a Proxy o TFile used to save the mass and the decay time histograms on the same ROOT file.(TFILE MODE is now on create: can't reopen a file... you can put UPDATE)
+
+ParticleReco compute total energy and invariant mass and it inherit form the template "Singleton" and from "LazyObservers" (energy and im are comuted in the update() function).
+
+ProperTime compute the decayTime and it inherit from the template "Singleton" and from "LazyObserver".
+
+MassMean makes the statistic analysis for the masses, LifeTimeFit is its corrispettive for the lifetime.
+
+
+Costants contains useful costants
+
+utilities contains useful function to compute energy, inv mass...
+
+for more information check <foldername>.txt file in this folder.
+
+
+

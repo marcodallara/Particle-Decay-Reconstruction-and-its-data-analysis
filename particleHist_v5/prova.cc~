@@ -1,0 +1,21 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+#include "TH1F.h"
+#include "TFileProxy.h"
+using namespace std;
+
+int main(){
+  ifstream fin("eliminami.txt");
+  vector<double> v;
+  for(auto c: v) fin>>c;
+   TDirectory* currentDir= gDirectory;
+   TFileProxy* file= new TFileProxy( "hists" , "CREATE");
+   for(auto c:pList) c->h->Write();
+   file->Close();
+   delete file; 
+   currentDir->cd();  
+
+
+}
