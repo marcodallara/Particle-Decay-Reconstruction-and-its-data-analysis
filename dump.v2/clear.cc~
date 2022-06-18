@@ -1,0 +1,12 @@
+#include <iostream>
+#include <fstream>
+
+#include "Event.h"
+#include "Particle.h"
+
+void clear(const Event* e){
+  for(int i=0;i<e->n_particle;i++)  delete e->p[i];
+  delete[] e->p;
+  delete e;
+
+}

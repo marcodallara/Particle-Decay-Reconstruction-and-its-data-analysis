@@ -1,0 +1,12 @@
+./execName fileName
+
+
+
+read.cc reads events from files
+
+dump.cc dumps events data
+
+for more information check <foldername>.txt file in this folder.
+
+
+

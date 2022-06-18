@@ -1,0 +1,15 @@
+#include <iostream>
+#include <fstream>
+
+int read(std::ifstream& file, float& x, float& y, float& z, int* charge, float* p_x, float* p_y, float* p_z ){
+    //read xyz coord.
+    file>>x>>y>>z;
+    //read numeber of particle
+    int particle_num;
+    file>>particle_num;
+    //read charge and momentum for each particle
+    for(int i=0;i<particle_num;i++){
+        file>>*(charge+i)>>*(p_x+i)>>*(p_y+i)>>*(p_z+i);
+    }
+    return particle_num;
+}
