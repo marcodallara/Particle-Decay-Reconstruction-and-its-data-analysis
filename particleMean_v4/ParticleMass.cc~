@@ -1,0 +1,30 @@
+#include <iostream>
+
+#include "MassMean.h"
+#include "ParticleMass.h"
+
+ParticleMass::ParticleMass() {
+}
+
+
+ParticleMass::~ParticleMass() {
+  for(auto c:pList) delete c;
+}
+//load two type of particles
+void ParticleMass:: beginJob(){
+  pList.push_back(new MassMean(0.495, 0.500));
+  pList.push_back(new MassMean(1.115, 1.116));
+}
+
+void ParticleMass:: endJob(){
+  for(unsigned int i=0; i<pList.size();i++ ) {
+    pList.at(i)->compute();
+    // print number of selected events and results 
+    std::cout<<"particle n: "<<i+1<<std::endl<<"selected events"<<pList.at(i)->get_n_accev()<<std::endl;
+   std::cout<<" mean and rms"<<pList.at(i)->get_mean_im()<<"  "<<pList.at(i)->get_rms_im()<<std::endl;
+}
+}
+
+void ParticleMass:: process( const Event& ev){
+  for(auto c: pList ) c->add(ev);
+}

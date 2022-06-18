@@ -1,0 +1,35 @@
+#ifndef MassMean_h
+#define MassMean_h
+
+class Event;
+
+class MassMean {
+
+ public:
+
+  MassMean( float min, float max ); // mass range
+  ~MassMean();
+
+  void add( const Event& ev );      // add data from a new event
+  void compute();                   // compute mean and rms
+  
+  int get_n_accev() const ;      // return number of accepted events
+  const double get_mean_im() const;    // return mean mass
+  const double get_rms_im() const;     // return rms  mass
+
+ private:
+
+  double min_im; // min mass
+  double max_im; // max mass
+
+  int n_accev; // number of accepted events
+  double sum_im;// sum of masses
+  double sum_sqim; // sum of masses square
+
+  double mean_im; // mean mass
+  double rms_im; // rms  mass
+
+};
+
+#endif
+
